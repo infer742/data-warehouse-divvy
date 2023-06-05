@@ -15,6 +15,8 @@ password = os.getenv("PG_PW")
 sslmode = "require"
 dbname = os.getenv("PG_DB_NAME")
 conn_string = "host={0} user={1} dbname={2} password={3} sslmode={4}".format(host, user, dbname, password, sslmode)
+
+# Connect to Postgres for Azure
 conn = psycopg2.connect(conn_string)
 conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT);
 print("Connection established")
