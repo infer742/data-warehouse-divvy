@@ -25,11 +25,12 @@ The given business requirements were as follows:
 3. Transform the data into the designed data model with Transact-SQL
 
 
-The scripts used to load and transform the data can be found in the ``scripts`` folder.
-
 Designed data model:
 ![Alt text](docs/img/divvy_schema.png)
+The data was extracted into Azure blob storage:
+![Alt text](docs/img/blob_storage.PNG)
 
+The scripts used to load and transform the data can be found in the ``scripts`` folder.
 
 ## Data
 > Divvy  is a bike sharing program in Chicago, Illinois USA that allows riders to purchase a pass at a kiosk or use a mobile application to unlock a bike at stations around the city and use the bike for a specified amount of time. The bikes can be returned to the same station or to another station. The City of Chicago makes the anonymized bike trip data publicly available for projects like this where we can analyze the data. <br>
