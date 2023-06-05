@@ -21,7 +21,7 @@ CREATE EXTERNAL TABLE [dbo].[dim_end_station]
     DATA_SOURCE = [dlsfs_datalakeudacity_dfs_core_windows_net],
     FILE_FORMAT = [SynapseDelimitedTextFormat]
     )
-AS SELECT station_id as start_station_id, name, latitude, longitude
+AS SELECT station_id as end_station_id, name, latitude, longitude
 FROM [dbo].[staging_station] rider
 GO
 
