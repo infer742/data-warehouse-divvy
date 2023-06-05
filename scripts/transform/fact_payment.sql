@@ -15,16 +15,17 @@ IF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'dlsfs_datal
 	)
 GO
 
-CREATE EXTERNAL TABLE [dbo].[dim_payment]
+CREATE EXTERNAL TABLE [dbo].[fact_payment]
     WITH (
-    LOCATION = 'dim_payment',
+    LOCATION = 'fact_payment',
     DATA_SOURCE = [dlsfs_datalakeudacity_dfs_core_windows_net],
     FILE_FORMAT = [SynapseDelimitedTextFormat]
     )
-AS SELECT payment_id, amount
-FROM [dbo].[staging_payment];
+AS SELECT payment_id, amount, date as payment_date_key, account_number, rider_id,  DATEDIFF(year, rider.birthday, rider.start_date) as rider_age_account_start 
+FROM [dbo].[staging_payment] payment
+join [dbo].[staging_rider] rider on (payment.account_number = rider.rider_id);
 GO
 
 
-SELECT TOP 100 * FROM [dbo].[dim_payment]
+SELECT TOP 100 * FROM [dbo].[fact_payment]
 GO

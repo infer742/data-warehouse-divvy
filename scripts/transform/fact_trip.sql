@@ -1,3 +1,4 @@
+
  if NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'dlsfs_datalakeudacity_dfs_core_windows_net') 
 	CREATE EXTERNAL DATA SOURCE [dlsfs_datalakeudacity_dfs_core_windows_net] 
 	WITH (
@@ -12,13 +13,11 @@ CREATE EXTERNAL TABLE [dbo].[fact_trip]
     FILE_FORMAT = [SynapseDelimitedTextFormat]
     )
     as
-select trip.trip_id as trip_id, rideable_type, started_at, ended_at, DATEDIFF(minute, started_at, ended_at) as duration, 
-    DATEDIFF(year, rider.birthday, started_at) as age_of_rider, DATEDIFF(year, rider.birthday, rider.start_date) as rider_age_account_start, rider.rider_id, payment.payment_id as payment_id,
-    payment.date as payment_date_id, payment.account_number as account_id, start_station_id, end_station_id
+select trip.trip_id as trip_id, rideable_type, started_at as start_date_id, ended_at as end_date_id, DATEDIFF(minute, started_at, ended_at) as duration, 
+    DATEDIFF(year, rider.birthday, started_at) as age_of_rider, rider.rider_id, start_station_id, end_station_id
 
 from [dbo].[staging_trip] trip 
 join [dbo].[staging_rider] rider on (trip.member_id = rider.rider_id)
-join [dbo].[staging_payment] payment on (rider.rider_id = payment.account_number)
 join [dbo].[staging_station] start_station on (trip.start_station_id = start_station.station_id)
 join [dbo].[staging_station] end_station on (trip.end_station_id = end_station.station_id)
 
