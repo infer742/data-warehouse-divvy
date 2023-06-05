@@ -16,9 +16,9 @@ GO
 
 CREATE EXTERNAL TABLE [dbo].[staging_rider] (
 	[rider_id] bigint,
-	[address] nvarchar(4000),
 	[first] nvarchar(4000),
 	[last] nvarchar(4000),
+    [address] NVARCHAR(4000),
 	[birthday] datetime2(0),
 	[start_date] datetime2(0),
 	[end_date] datetime2(0),
